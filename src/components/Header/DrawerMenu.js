@@ -18,7 +18,6 @@ export default class DrawerMenu extends React.Component{
                 <div style={{width: '17%', height: '100%'}} onClick={() =>{
                     this.props.toggleDisplay()
                 }}>
-
                 </div>
             </div>
         )
@@ -40,5 +39,6 @@ const styles = {
         width: '83%',
         height: '100%',
         backgroundColor: 'white',
+        borderRight: '1px dotted black'
     }
 }

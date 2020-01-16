@@ -7,22 +7,33 @@ export default class ProductCarousel extends React.Component{
     
     render(){
         let imageLocations = [
-            'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-            'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-            'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            'https://ae01.alicdn.com/kf/HTB1DqcPX8WD3KVjSZFsq6AqkpXaZ/Disney-Pixar-Cars-Toys-Lightning-McQueen-Mack-Uncle-Truck-Action-Figure-Toy-Diecast-Model-Car-for.jpg',
+            'https://ae01.alicdn.com/kf/HTB1SKQNX21G3KVjSZFkq6yK4XXa9/Disney-Pixar-Cars-Toys-Lightning-McQueen-Mack-Uncle-Truck-Action-Figure-Toy-Diecast-Model-Car-for.jpg',
+            'https://ae01.alicdn.com/kf/HTB1t4sNX.KF3KVjSZFEq6xExFXaA/Disney-Pixar-Cars-Toys-Lightning-McQueen-Mack-Uncle-Truck-Action-Figure-Toy-Diecast-Model-Car-for.jpg',
+            'https://ae01.alicdn.com/kf/HTB1jAIMX21H3KVjSZFBq6zSMXXal/Disney-Pixar-Cars-Toys-Lightning-McQueen-Mack-Uncle-Truck-Action-Figure-Toy-Diecast-Model-Car-for.jpg',
+            'https://ae01.alicdn.com/kf/HTB1n3gTX8Kw3KVjSZFOq6yrDVXao/Disney-Pixar-Cars-Toys-Lightning-McQueen-Mack-Uncle-Truck-Action-Figure-Toy-Diecast-Model-Car-for.jpg',
+        ]
+        let testimonials = [
+          'Rapid devilery, arrived to Austraila in just over 2 weeks... Truck plastic & as shown in picture... Very happy...',
         ]
         return(
-            <div>
-                <div>
+            <div className="responsive-layout-carousel">
+                <div className='w-100 h-100' style={{flex: 1,}}>
                     <CarouselComponent
                         imageLocations={imageLocations}
                     />
                 </div>
-                <div>
-                    <InformationalComponent />
-                </div>
-                <div>
-                    <AddToCartButtonComponent />
+                <div style={{flex: 1}}>
+                    <div>
+                        <InformationalComponent 
+                          testimonials={testimonials}
+                        />
+                    </div>
+                    <div>
+                        <AddToCartButtonComponent 
+                          addItemToCart={this.props.addItemToCart}
+                        />
+                    </div>
                 </div>
             </div>
         )
@@ -40,16 +51,16 @@ const styles = {
 function CarouselComponent(props){
     let imageLocations = props.imageLocations
     return(
-        <div>
+        <div className='mx-auto p-3'>
             <Carousel
                 showArrows={false}
                 showThumbs={false}
                 showStatus={false}
-                showIndicators={false}           
+                showIndicators={true}           
             >
                 {imageLocations.map((inst, i)=>{
                     return(
-                        <div>
+                        <div key={i}>
                             <img alt='failed to load' src={inst} />
                         </div>
                     )
@@ -58,21 +69,27 @@ function CarouselComponent(props){
         </div>
     )
 }
-function InformationalComponent(){
+
+//Want to make this a carousel as well. Imported Comp only supports images.
+function InformationalComponent(props){
+  let testimonials = props.testimonials
     return (
-        <div>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book                
-            </p>
+        <div className='mx-auto p-3'>
+            {testimonials.map((inst, i) =>{
+              return (
+                <p key={'test-' + i}>
+                  "{inst}"                
+                </p>
+              )
+            })}
         </div>
     )
 }
-function AddToCartButtonComponent(){
+function AddToCartButtonComponent(props){
+
     return (
         <div>
-            <div id="addOneBtn" className='mx-auto' style={styles.button}>
+            <div onClick={() => props.addItemToCart('Disney Car Model (#DSF45F5)')} id="addOneBtn" className='mx-auto' style={styles.button}>
                 Add One
             </div>
         </div>

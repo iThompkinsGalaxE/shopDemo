@@ -13,11 +13,33 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+input{
+  border: 0;
+  border-bottom: 1px solid blue;
+  width: 100%;
+  font-size: 20px;
+  padding: 20px;
+  outline: none;
+  text-align: center;
+}
+
+input:focus{
+  border-bottom: 3px solid blue;
 }
 
 /*ProdCaro Styles*/
+@media only screen and (max-width: 600px){
+  .responsive-layout-carousel{
+    display: block;
+    flex-direction: column;
+  }  
+}
+@media only screen and (min-width: 600px){
+  .responsive-layout-carousel{
+    display: flex;
+    flex-direction: row;
+  }
+}
 
 
 @keyframes App-logo-spin {
@@ -27,4 +49,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* Throwaway Styles */
+.pointer{
+  cursor: pointer;
 }

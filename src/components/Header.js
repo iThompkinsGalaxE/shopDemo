@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 import DrawerMenu from './Header/DrawerMenu'
+import Cart from './Header/Cart'
 
 export default class Header extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            drawerDisplay: 'none'
+          drawerDisplay: 'none',
+          cartDisplay: 'flex'
         }
     }
 
@@ -19,15 +21,28 @@ export default class Header extends React.Component{
                     display={this.state.drawerDisplay}
                     toggleDisplay={() => this.setState({drawerDisplay: 'none'})}
                 />
+                <Cart 
+                    display={this.state.cartDisplay}
+                    toggleDisplay={() => this.setState({cartDisplay: 'none'})} 
+                    itemsInCart={this.props.itemsInCart}
+                />
                 <div style={styles.headerItem}>
-                    <span style={{float: 'left'}} onClick={() =>{
+                    <span className='p-2' style={{float: 'left'}} onClick={() =>{
                         this.setState({drawerDisplay: 'flex'})
                     }}>
                         <FontAwesomeIcon icon={faBars} />
                     </span>
                 </div>
                 <div style={styles.headerItem}>
-                    <span style={{float: 'right'}}><FontAwesomeIcon icon={faShoppingCart} /></span>
+                  
+                    <span className='p-2' style={{float: 'right'}} onClick={() => {
+                        this.setState({cartDisplay: 'flex'})
+                    }}>
+                      {(this.props.itemsInCart.length > 0) && <span style={styles.cartNotif}>
+                        {this.props.itemsInCart.length}
+                      </span>}
+                      <FontAwesomeIcon icon={faShoppingCart} />
+                      </span>
                 </div>
             </div>
         )
@@ -43,4 +58,11 @@ const styles = {
     headerItem: {
         flex: 1,
     },
+    cartNotif:{
+      backgroundColor: 'red',
+      borderRadius: '200px',
+      paddingLeft: 7,
+      paddingRight: 7,
+      color: 'white',
+    }
 }
