@@ -10,7 +10,7 @@ export default class Header extends React.Component{
         super(props)
         this.state = {
           drawerDisplay: 'none',
-          cartDisplay: 'flex'
+          cartDisplay: 'none'
         }
     }
 

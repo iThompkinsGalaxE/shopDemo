@@ -6,7 +6,7 @@ export default class Cart extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      checkout: !true,
+      checkout: true,
     }
   }
     render(){
