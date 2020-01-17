@@ -7,7 +7,8 @@ export function logInFunc(email, password){
 		dispatch(getAuth());
 		Auth.signIn(email, password)
 		.then(json => {
-			dispatch(getAuthSuccess(json))
+      dispatch(getAuthSuccess(json))
+      console.log(json)
 		})
 		.catch(err => {
 			dispatch(getAuthFailure(err))

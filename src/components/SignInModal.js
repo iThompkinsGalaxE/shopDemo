@@ -4,8 +4,8 @@ export default class SignInModal extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            email: '',
-            password: '',
+            email: 'ithompkins@galaxe.com',
+            password: '!Foobar321',
         }
     }
 

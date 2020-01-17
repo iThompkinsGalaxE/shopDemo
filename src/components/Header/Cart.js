@@ -9,52 +9,70 @@ export default class Cart extends React.Component{
       checkout: true,
     }
   }
-    render(){
-        return(
-            <div style={{...styles.overlay, display: this.props.display}}>
-                <div style={{width: '17%', height: '100%'}} onClick={() =>{
-                    this.props.toggleDisplay()
-                }}>
-                </div>
-                  <div style={styles.menu}>
-                    <div style={styles.menuHeader}>
-                      <h4>
-                        {(this.state.checkout ? "Checkout" : "Please Enter Card Info")}
-                      </h4>
-                    </div>
-                    {this.state.checkout&& 
-                    <div style={{overflow: 'hidden'}}>                
-                      {this.props.itemsInCart.map((item, i) =>{
-                        return (
-                          <div key={'item-' + i} style={styles.item}>
-                            <div style={{flex: 1}}>
-                              {item}
-                            </div>
-                            <div style={{flex: 1}}>
-                              X 1
-                            </div>
-                          </div>
-                        )
-                      })}
-                    </div>
-                    }
-                    {this.state.checkout&&             
-                      <div style={styles.total}>
-                        <div style={{flex: 1}}>TOTAL: </div>
-                        <div style={{flex: 1}}>${this.props.itemsInCart.length * 9.99}</div>
-                        <div onClick={() => this.setState({checkout: false})} style={{backgroundColor: 'green', color: 'white', borderRadius: '7px', padding: 7}}>PAY</div>
-                      </div>
-                    }
-                    {!this.state.checkout&&
-                      <div style={{width: '100%', height: '100%',}}>
-                        <CheckoutComponent />
-                      </div>
-                    }
+
+  createOrder(){
+    fetch('https://tfywy7qt3l.execute-api.us-east-2.amazonaws.com/production/orders', {
+      method: 'POST',
+      header: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        idToken: this.props.session.idToken
+      },
+      body: JSON.stringify({
+        title: 'yabbadabba doo',
+      }),
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
+  }
+
+  render(){
+      return(
+          <div style={{...styles.overlay, display: this.props.display}}>
+              <div style={{width: '17%', height: '100%'}} onClick={() =>{
+                  this.props.toggleDisplay()
+              }}>
+              </div>
+                <div style={styles.menu}>
+                  <div style={styles.menuHeader}>
+                    <h4>
+                      {(this.state.checkout ? "Checkout" : "Please Enter Card Info")}
+                    </h4>
                   </div>
-        
-            </div>
-        )
-    }
+                  {this.state.checkout&& 
+                  <div style={{overflow: 'hidden'}}>                
+                    {this.props.itemsInCart.map((item, i) =>{
+                      return (
+                        <div key={'item-' + i} style={styles.item}>
+                          <div style={{flex: 1}}>
+                            {item}
+                          </div>
+                          <div style={{flex: 1}}>
+                            X 1
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  }
+                  {this.state.checkout&&             
+                    <div style={styles.total}>
+                      <div style={{flex: 1}}>TOTAL: </div>
+                      <div style={{flex: 1}}>${this.props.itemsInCart.length * 9.99}</div>
+                      <div onClick={() => this.createOrder()} style={{backgroundColor: 'green', color: 'white', borderRadius: '7px', padding: 7}}>PAY</div>
+                    </div>
+                  }
+                  {!this.state.checkout&&
+                    <div style={{width: '100%', height: '100%',}}>
+                      <CheckoutComponent />
+                    </div>
+                  }
+                </div>
+      
+          </div>
+      )
+  }
 }
 
 

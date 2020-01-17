@@ -25,6 +25,7 @@ export default class Header extends React.Component{
                     display={this.state.cartDisplay}
                     toggleDisplay={() => this.setState({cartDisplay: 'none'})} 
                     itemsInCart={this.props.itemsInCart}
+                    session={this.props.session}
                 />
                 <div style={styles.headerItem}>
                     <span className='p-2' style={{float: 'left'}} onClick={() =>{
