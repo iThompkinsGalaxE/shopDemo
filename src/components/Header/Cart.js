@@ -1,6 +1,6 @@
 import React from 'react'
 import Form from '../Checkout/Checkout'
-import {StripeProvider, Elements} from 'react-stripe-elements';
+import {StripeProvider, Elements} from 'react-stripe-elements'
 
 export default class Cart extends React.Component{
   constructor(props){
@@ -17,10 +17,10 @@ export default class Cart extends React.Component{
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        idToken: this.props.session.idToken
+        idToken: this.props.session.idToken,
       },
       body: JSON.stringify({
-        title: 'yabbadabba doo',
+        title: 'Disney Car Model (#DSF45F5)',
       }),
     })
     .then((res) => console.log(res))
